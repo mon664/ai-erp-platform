@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Next.js 16에서는 appDir가 기본 활성화되어 있음
+  // Railway 환경에서 포트 설정
+  port: process.env.PORT || 3000,
+  // 빌드 최적화
+  poweredByHeader: false,
+  // 정적 파일 최적화
+  compress: true,
 }
 
 module.exports = nextConfig
