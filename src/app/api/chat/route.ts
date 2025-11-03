@@ -123,7 +123,7 @@ export async function POST(request: NextRequest) {
         result = await saveDolSale(aiResult.data)
         return NextResponse.json({
           success: true,
-          message: `✅ 판매 등록 완료!\n${aiResult.data.product} ${aiResult.data.quantity}개 → ${aiResult.data.customer}\n금액: ${aiResult.data.price.toLocaleString()}원`,
+          message: `✅ 판매 등록 완료!\n${aiResult.data.product} ${aiResult.data.quantity}개 → ${aiResult.data.customer}\n금액: ${aiResult.data.price?.toLocaleString() || 0}원`,
           data: result
         })
 
@@ -131,14 +131,14 @@ export async function POST(request: NextRequest) {
         result = await saveDolPurchase(aiResult.data)
         return NextResponse.json({
           success: true,
-          message: `✅ 구매 등록 완료!\n${aiResult.data.product} ${aiResult.data.quantity}kg ← ${aiResult.data.vendor}\n금액: ${aiResult.data.price.toLocaleString()}원`,
+          message: `✅ 구매 등록 완료!\n${aiResult.data.product} ${aiResult.data.quantity}kg ← ${aiResult.data.vendor}\n금액: ${aiResult.data.price?.toLocaleString() || 0}원`,
           data: result
         })
 
       case 'stats':
         return NextResponse.json({
           success: true,
-          message: `📊 오늘 통계\n오늘 매출: ${aiResult.data.todaySales.toLocaleString()}원\n월 성장률: ${aiResult.data.monthGrowth}%`,
+          message: `📊 오늘 통계\n오늘 매출: ${aiResult.data.todaySales?.toLocaleString() || 0}원\n월 성장률: ${aiResult.data.monthGrowth || 0}%`,
           data: aiResult.data
         })
 
